@@ -1,14 +1,22 @@
 const showInfo = () => {
   let y = 0;
+  const microButton = document.querySelector("#microfono-button");
   const playButton = document.querySelector("#play-button");
   const pauseButton = document.querySelector("#pause-button");
   const stopButton = document.querySelector("#stop-button");
   const audio = document.querySelector('#mi-audio');
-
   const webButton = document.querySelector("#web-button");
   const text = document.querySelector("#text");
 
-  playButton.setAttribute("visible", true);
+  pauseButton.setAttribute("visible", false);
+  stopButton.setAttribute("visible", false);
+
+  
+
+  microButton.setAttribute("visible", true);
+  setTimeout(() => {
+    playButton.setAttribute("visible", true);
+  }, 300);
   setTimeout(() => {
     pauseButton.setAttribute("visible", true);
   }, 300);
@@ -19,13 +27,8 @@ const showInfo = () => {
   setTimeout(() => {
     webButton.setAttribute("visible", true);
   }, 600);
-  /*setTimeout(() => {
-    locationButton.setAttribute("visible", true);
-  }, 900);*/
 
-  playButton.setAttribute("visible", true);
-  pauseButton.setAttribute("visible", false);
-  stopButton.setAttribute("visible", false);
+ 
 
   let currentTab = '';
 
@@ -45,13 +48,6 @@ const showInfo = () => {
   webButton.addEventListener('click', function (evt) {
     window.location.href="https://www.tlaxiaco.tecnm.mx/";
   });
-
-  /*profileButton.addEventListener('click', function (evt) {
-    text.setAttribute("value", "AR, VR solutions and consultation");
-    currentTab = 'profile';
-  });*/
-
-
 
   text.addEventListener('click', function (evt) {
     if (currentTab === 'web') {
@@ -84,133 +80,27 @@ const showInfo = () => {
  }
 
   playButton.addEventListener('click', function() {
-    // Reproducir el audio cuando se hace clic en el objeto interactivo
-      playAudio();
+    playAudio();
   });
 
   pauseButton.addEventListener('click', function() {
-    // Reproducir el audio cuando se hace clic en el objeto interactivo
     pauseAudio();
   });
 
   stopButton.addEventListener('click', function() {
-    // Reproducir el audio cuando se hace clic en el objeto interactivo
     stopAudio();
   });
 
 }
 
-const showPortfolio = (done) => {
-  const portfolio = document.querySelector("#portfolio-panel");
-  const portfolioLeftButton = document.querySelector("#portfolio-left-button");
-  const portfolioRightButton = document.querySelector("#portfolio-right-button");
-
-  const playButtonVideo = document.querySelector("#playVideo");
-  const pauseButtonVideo = document.querySelector("#pauseVideo");
-  const stopButtonVideo = document.querySelector("#stopVideo");
-  const paintandquestVideo = document.querySelector("#paintandquest-video-mp4");
-
-  const iconPlay = document.querySelector("#icon-play");
-
-  pauseButtonVideo.setAttribute("visible", false);
-  stopButtonVideo.setAttribute("visible", false);
-
-  let y = 0;
-  let currentItem = 0;
-
-  portfolio.setAttribute("visible", true);
-
-  const showPortfolioItem = (item) => {
-    for (let i = 0; i <= 2; i++) {
-      document.querySelector("#portfolio-item" + i).setAttribute("visible", i === item);
-    }
-  }
-
-  const playVideo = () => {
-    playButtonVideo.setAttribute("visible", false);
-    pauseButtonVideo.setAttribute("visible", true);
-    stopButtonVideo.setAttribute("visible", true);
-
-    const testVideo = document.createElement( "video" );
-    const canplayWebm = testVideo.canPlayType( 'video/mkv; codecs="vp8, vorbis"' );
-    if (canplayWebm == "") {
-      document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-mp4");
-      paintandquestVideo.play();
-    } else {
-      document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-webm");
-      paintandquestVideo.play();
-    }
-  }
-
-  const pauseVideo = () => {
-    playButtonVideo.setAttribute("visible", true);
-    pauseButtonVideo.setAttribute("visible", false);
-    stopButtonVideo.setAttribute("visible", true);
-    
-    paintandquestVideo.pause();
-  }
-
- const stopVideo = () => {
-    playButtonVideo.setAttribute("visible", true);
-    pauseButtonVideo.setAttribute("visible", false);
-    stopButtonVideo.setAttribute("visible", false);
-    paintandquestVideo.pause();
-    paintandquestVideo.currentTime = 0;
- }
-
-  playButtonVideo.addEventListener('click', () => {
-    playVideo();
-  });
-
-  pauseButtonVideo.addEventListener('click', () => {
-    pauseVideo();
-  });
-
-  stopButtonVideo.addEventListener('click', () => {
-    stopVideo();
-  });
-
-
-
-  const id = setInterval(() => {
-    y += 0.008;
-    if (y >= 0.6) {
-      clearInterval(id);
-      portfolioLeftButton.setAttribute("visible", true);
-      portfolioRightButton.setAttribute("visible", true);
-      portfolioLeftButton.addEventListener('click', () => {
-        currentItem = (currentItem + 1) % 3;
-        showPortfolioItem(currentItem);
-      });
-      portfolioRightButton.addEventListener('click', () => {
-        currentItem = (currentItem - 1 + 3) % 3;
-        showPortfolioItem(currentItem);
-      });
-
-      setTimeout(() => {
-        done();
-      }, 500);
-    }
-    portfolio.setAttribute("position", "0 " + y + " -0.01");
-  }, 10);
-}
-
-
 const showAvatar = (onDone) => {
   const avatar = document.querySelector("#avatar");
-  let z = -0.3;
-  const id = setInterval(() => {
-    z += 0.008;
-    if (z >= 0.3) {
-      clearInterval(id);
-      onDone();
-    }
-    avatar.setAttribute("position", "0 -0.25 " + z);
-  }, 10);
+  avatar.setAttribute("position", "0 -0.20 0.3"); // Establecer posición estática
+  onDone(); // Llamar a la función de finalización
 }
 
 AFRAME.registerComponent('mytarget', {
-  init: function () {
+  /*init: function () {
     this.el.addEventListener('targetFound', event => {
       console.log("target found");
       showAvatar(() => {
@@ -227,5 +117,114 @@ AFRAME.registerComponent('mytarget', {
       console.log("target found");
     });
     //this.el.emit('targetFound');
+  }*/
+
+  init: function () {
+    const sceneEl = document.querySelector('a-scene');
+
+    sceneEl.addEventListener('loaded', () => {
+      console.log("Scene loaded");
+      // Realizar acciones necesarias después de que se haya cargado la escena, incluida la realidad aumentada
+      showAvatar(() => {
+        setTimeout(() => {
+          showPortfolio(() => {
+            setTimeout(() => {
+              showInfo();
+            }, 300);
+          });
+        }, 300);
+      });
+      // Por ejemplo, eliminar la dependencia de la imagen
+      sceneEl.removeAttribute('mindar-image');
+    });
   }
 });
+
+window.addEventListener('load', () => {
+  const contenedor = document.querySelector('.contenedor');
+  contenedor.style.visibility = 'hidden';
+  contenedor.style.opacity = 0;
+  contenedor.setAttribute("visible", false);
+});
+
+window.contador = 0;
+window.contadorcubogrande = 0;
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
+var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+
+var arreglovoz = ['Hola',
+  'Reproduce la explicación',
+        'Pausa la explicación',
+        'Reinicia la explicación',
+      ];
+
+      var grammar = '#JSGF V1.0; grammar arreglovoz; public <arreglovoz> = ' + arreglovoz.join(' | ') + ' ;'
+    
+      var recognition = new SpeechRecognition();
+      var speechRecognitionList = new SpeechGrammarList();
+      speechRecognitionList.addFromString(grammar, 1);
+      recognition.grammars = speechRecognitionList;
+      recognition.continuous = false;
+      recognition.lang = 'es-MX';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      var diagnostic = document.querySelector('#text'); 
+      var vozHTML = '';
+      arreglovoz.forEach(function (v, i, a) {
+        console.log(v, i);
+    
+      });
+    
+      window.onload = function() {
+      function micro(){
+     recognition.start();
+     console.log('Estoy listo para escuchar.');
+    }
+    document.getElementById('microfono-button').onclick = micro;
+    }
+
+
+
+    recognition.onresult = function (event) {
+      var voz = event.results[0][0].transcript;         
+      diagnostic.setAttribute("value", "Dijiste: " + voz + ".");
+      bg = voz;
+      var bg = document.querySelector('text');
+  
+  
+      //VISUALIZO EN CONSOLA
+      console.log(bg);
+      console.log(voz);
+  
+      function randD(array) {
+        var rand = Math.random() * array.length | 0;
+        var result = array[rand];
+        return result;
+      }
+  
+      // Interacciones iniciales
+      if (voz === 'Hola') {
+        console.log("Claro, reproduciendo la explicación!");
+        let utterance = new SpeechSynthesisUtterance('Hola amigo, bienvenido. Estoy listo y preparado para resolver tus dudas. Te escucho...')
+        //playAudio();
+        utterance.lang = 'es-MX'
+        speechSynthesis.speak(utterance)
+      }
+
+      console.log('Confidence: ' + event.results[0][0].confidence);
+    }
+  
+  
+    recognition.onspeechend = function () {
+      recognition.stop();
+    }
+  
+    recognition.onnomatch = function (event) {
+      diagnostic.setAttribute("value", "No puedo escucharte claramente, por favor repiteme.");
+    }
+  
+    recognition.onerror = function (event) {
+      diagnostic.setAttribute("value", 'Ocurrio un error al escucharte: ' + event.error);
+    }

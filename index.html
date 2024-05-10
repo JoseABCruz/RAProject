@@ -10,6 +10,10 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="styles.css">
 
 
@@ -28,12 +32,14 @@
       <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.2/examples/image-tracking/assets/card-example/card.mind; showStats: false; uiScanning: #example-scanning-overlay;" embedded="" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false" inspector="" keyboard-shortcuts="" screenshot="">
         <a-assets>
           <img id="card" src="./index_files/card.png">
-          <img id="icon-web" src="./index_files/web.png">
+          <img id="icon-web" src="./index_files/github.png">
           <img id="icon-nuevo" src="./index_files/profile.png">
           <img id="icon-location" src="./index_files/location.png">
           <img id="icon-profile" src="./index_files/profile.png">
           <img id="icon-phone" src="./index_files/phone.png">
           <img id="icon-email" src="./index_files/email.png">
+
+          <img id="icon-microphone" src="./index_files/microfono.png">
 
           <img id="icon-play" src="./index_files/play.png">
           <img id="icon-pause" src="./index_files/pause.png">
@@ -58,44 +64,18 @@
           <a-asset-item id="avatarModel" src="https://cdn.glitch.global/5fd08afd-0471-4c04-a0b3-3e77bf637cf6/TucanAnimation.glb?v=1712100743390"></a-asset-item>
         </a-assets>
 
-        <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable" camera="" rotation="" wasd-controls="">
+        <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable">
         </a-camera>
 
-        <a-entity id="mytarget" mytarget="" mindar-image-target="targetIndex: 0">
-          <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0" material="" geometry=""></a-plane>
+        <a-entity id="mytarget" mytarget mindar-image-target="targetIndex: 0">
+          <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
 
-          <a-entity visible="false" id="portfolio-panel" position="0 0 -0.01">
-            <a-text value="Portfolio" color="black" align="center" width="2" position="0 0.4 0" text=""></a-text>
-            <a-entity id="portfolio-item0">
-              <a-video id="paintandquest-video-link" webkit-playsinline="" playsinline="" width="1" height="0.552" position="0 0 0.1" material="" geometry=""></a-video>
-              <a-image id="playVideo" class="clickable" src="#icon-play2" alpha-test="0.5" position="0 0 0.2" height="0.2" width="0.2" material="" geometry="">
-              </a-image>
-              <a-image id="pauseVideo" class="clickable" src="#icon-pause2" alpha-test="0.5" position="-0.25 0 0.2" height="0.2" width="0.2" material="" geometry="">
-              </a-image>  
-              <a-image id="stopVideo" class="clickable" src="#icon-stop2" alpha-test="0.5" position="0.25 0 0.2" height="0.2" width="0.2" material="" geometry="">
-              </a-image>
-              
-            </a-entity>
-            
-            <a-entity id="portfolio-item1" visible="false">
-              <a-image class="clickable" src="#coffeemachine-preview" alpha-test="0.5" position="0 0 0" height="0.552" width="1" material="" geometry="">
-              </a-image>
-            </a-entity>
-            <a-entity id="portfolio-item2" visible="false">
-              <a-image class="clickable" src="#peak-preview" alpha-test="0.5" position="0 0 0" height="0.552" width="1" material="" geometry="">
-              </a-image>
-            </a-entity>
+    
 
-            <a-image visible="false" id="portfolio-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15" material="" geometry=""></a-image>
-            <a-image visible="false" id="portfolio-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15" material="" geometry=""></a-image>
-
-          </a-entity>
 
           <a-entity position="0 0 0">
             <a-sound src="#mi-audio" autoplay="false" loop="false"></a-sound>
           </a-entity>
-
-          
 
           <a-image visible="false" id="pause-button" class="clickable" src="#icon-pause" alpha-test="0.5" position="-0.42 -0.5 0" height="0.15" width="0.15" animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate" material="" geometry=""></a-image>
 
@@ -105,14 +85,19 @@
 
           <a-image visible="false" id="web-button" class="clickable" src="#icon-web" position="0.42 -0.5 0" height="0.15" width="0.15" animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate" material="" geometry=""></a-image>
 
-          <a-image visible="false" id="location-button" class="clickable" src="#icon-location" position="0.72 -0.5 0" height="0.15" width="0.15" animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate" material="" geometry=""></a-image>
+          <a-image visible="true" id="microfono-button" class="clickable" src="#icon-microphone" position="-0.14 -0.7 0" height="0.15" width="0.15" animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate" material="" geometry=""></a-image>
 
           <a-gltf-model id="avatar" rotation="0 0 0" position="0 -0.25 0" scale="0.2 0.2 0.2" src="#avatarModel" gltf-model=""></a-gltf-model>
 
-          <a-text id="text" class="clickable" value="" color="black" align="center" width="2" position="0 -1 0" geometry="primitive:plane; height: 0.1; width: 2;" material="opacity: 0.5" text=""></a-text>
+          <a-text id="text" class="clickable"
+          value="Da clic sobre el botón de microfono para probar la funcionalidad de la aplicación" color="white"
+          align="center" width="1" position="0 -1.001 0" geometry="primitive:plane; height: 0.5; width: 1.4;"
+          material="color: black; opacity: 0.5"></a-text>
+
         </a-entity>
       <canvas class="a-canvas" data-aframe-canvas="true" data-engine="three.js r147" width="1910" height="927"></canvas><div class="a-loader-title" style="display: none;"></div><a-entity light="" data-aframe-default-light="" aframe-injected=""></a-entity><a-entity light="" position="" data-aframe-default-light="" aframe-injected=""></a-entity></a-scene>
-    <video autoplay="" muted="" playsinline="" width="640" height="480" style="position: absolute; top: -202px; left: 0px; z-index: -2; width: 1528px; height: 1146px;"></video></div>
+    
+    </div>
   
 
 <div class="mindar-ui-overlay mindar-ui-loading hidden">
