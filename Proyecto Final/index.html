@@ -53,11 +53,6 @@
           <img id="icon-left" src="./index_files/left.png">
           <img id="icon-right" src="./index_files/right.png">
           
-
-          <audio id="mi-audio" src="./index_files/BeethovenVirusExtended.mp3" autoplay="false" loop="false"></audio>
-
-          <video id="paintandquest-video-mp4" autoplay="false" loop="true" src="./index_files/GATOBAILANDO.mp4" __idm_id__="524289" playsinline="" webkit-playsinline=""></video>
-          <video id="paintandquest-video-webm" autoplay="false" loop="true" src="./index_files/GATOBAILANDO.mkv" __idm_id__="524290" playsinline="" webkit-playsinline=""></video>
           <img id="coffeemachine-preview" src="./index_files/coffeemachine-preview.png">
           <img id="peak-preview" src="./index_files/peak-preview.png">
           
@@ -68,14 +63,6 @@
         </a-camera>
 
         <a-entity id="mytarget" mytarget mindar-image-target="targetIndex: 0">
-          <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-
-    
-
-
-          <a-entity position="0 0 0">
-            <a-sound src="#mi-audio" autoplay="false" loop="false"></a-sound>
-          </a-entity>
 
           <a-image visible="false" id="pause-button" class="clickable" src="#icon-pause" alpha-test="0.5" position="-0.42 -0.5 0" height="0.15" width="0.15" animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate" material="" geometry=""></a-image>
 
@@ -87,7 +74,7 @@
 
           <a-image visible="true" id="microfono-button" class="clickable" src="#icon-microphone" position="-0.14 -0.7 0" height="0.15" width="0.15" animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate" material="" geometry=""></a-image>
 
-          <a-gltf-model id="avatar" rotation="0 0 0" position="0 -0.25 0" scale="0.2 0.2 0.2" src="#avatarModel" gltf-model=""></a-gltf-model>
+          <a-gltf-model id="avatar" rotation="0 0 0" position="0 -0.25 0" scale="0.2 0.2 0.2" src="#avatarModel" gltf-model="" animation-mixer></a-gltf-model>
 
           <a-text id="text" class="clickable"
           value="Da clic sobre el botón de microfono para probar la funcionalidad de la aplicación" color="white"
