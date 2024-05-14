@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (voz === 'Inicia explicación.' || voz === 'Inicia, explicación.' || voz === 'Inicia la explicación.') {
         console.log("Iniciando la explicación!");
-        let utterance = new SpeechSynthesisUtterance('En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor.');
+        let utterance = new SpeechSynthesisUtterance('"¡¡¡Mmmmm!!!" Kiki el mono sonrió mientras lamía la última pieza de mango de sus patas. "¿A qué sabe eso?" Preguntó Simha, el el cachorro de león. "¿Antílope o rinoceronte?" "¡Tiene un sabor agridulce y me hace saltar más rápido a través de los árboles cuando pienso en ello!" dijo Kiki, saltando arriba y abajo. "¡Tráeme un poco!" dijo Simha.');
         diagnostic.setAttribute("value", "Dijiste: " + voz + ".");
         utterance.lang = 'es-MX'
             // Verificamos si hay un utterance actual pausado
