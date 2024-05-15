@@ -7,6 +7,12 @@ html.a-fullscreen {
   top: 0;
 }
 
+#overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000; /* Asegura que la capa de superposición esté por encima de la escena */
+}
 
 html.a-fullscreen body {
   height: 100%;
