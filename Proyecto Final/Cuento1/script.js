@@ -1,96 +1,8 @@
 const showInfo = () => {
-  let y = 0;
   const microButton = document.querySelector("#microfono-button");
-  const playButton = document.querySelector("#play-button");
-  const pauseButton = document.querySelector("#pause-button");
-  const stopButton = document.querySelector("#stop-button");
-  const audio = document.querySelector('#mi-audio');
-  const webButton = document.querySelector("#web-button");
-  const text = document.querySelector("#text");
-
-  pauseButton.setAttribute("visible", false);
-  stopButton.setAttribute("visible", false);
-
-  
 
   microButton.setAttribute("visible", true);
-  setTimeout(() => {
-    playButton.setAttribute("visible", true);
-  }, 300);
-  setTimeout(() => {
-    pauseButton.setAttribute("visible", true);
-  }, 300);
-  setTimeout(() => {
-    stopButton.setAttribute("visible", true);
-  }, 600);
-
-  setTimeout(() => {
-    webButton.setAttribute("visible", true);
-  }, 600);
-
  
-
-  let currentTab = '';
-
- 
-  playButton.addEventListener('click', function (evt) {
-    text.setAttribute("value", "Reproduciendo Audio");
-  });
-
-  pauseButton.addEventListener('click', function (evt) {
-    text.setAttribute("value", "Audio Pausado");
-  });
-
-  stopButton.addEventListener('click', function (evt) {
-    text.setAttribute("value", "Audio Detenido");
-  });
-
-  webButton.addEventListener('click', function (evt) {
-    window.location.href="https://www.tlaxiaco.tecnm.mx/";
-  });
-
-  text.addEventListener('click', function (evt) {
-    if (currentTab === 'web') {
-      window.location.href="https://www.tlaxiaco.tecnm.mx/";
-    }
-  });
-
-  const playAudio = () => {
-    playButton.setAttribute("visible", false);
-    pauseButton.setAttribute("visible", true);
-    stopButton.setAttribute("visible", true);
-    
-    audio.play();
-  }
-
-  const pauseAudio = () => {
-    playButton.setAttribute("visible", true);
-    pauseButton.setAttribute("visible", false);
-    stopButton.setAttribute("visible", true);
-    
-    audio.pause();
-  }
-
- const stopAudio = () => {
-    playButton.setAttribute("visible", true);
-    pauseButton.setAttribute("visible", false);
-    stopButton.setAttribute("visible", false);
-    audio.pause();
-    audio.currentTime = 0;
- }
-
-  playButton.addEventListener('click', function() {
-    playAudio();
-  });
-
-  pauseButton.addEventListener('click', function() {
-    pauseAudio();
-  });
-
-  stopButton.addEventListener('click', function() {
-    stopAudio();
-  });
-
 }
 
 // Variable global para controlar el estado de la animación
@@ -151,7 +63,15 @@ document.addEventListener('DOMContentLoaded', function() {
           let utterance = new SpeechSynthesisUtterance('Hola amigo, que bueno verte de nuevo...');
         diagnostic.setAttribute("value", "Dijiste: " + voz + ".");
         utterance.lang = 'es-MX'
-        speechSynthesis.speak(utterance)
+        currentUtterance = utterance;
+        speechSynthesis.speak(utterance);
+        avatar.setAttribute('animation-mixer', '');
+          if (currentUtterance) {
+            currentUtterance.onend = function(event) {
+              // Pausar la animación del modelo 3D cuando el texto ha terminado de leerse
+              avatar.removeAttribute('animation-mixer');
+            };
+          }
       }
 
       if (voz === 'Inicia explicación.' || voz === 'Inicia, explicación.' || voz === 'Inicia la explicación.'|| voz === 'Iniciar.') {
@@ -202,11 +122,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
       console.log('Confidence: ' + event.results[0][0].confidence);
   };
-});
-
 
   recognition.onspeechend = function () {
-      recognition.stop();
+    recognition.stop();
   };
 
   recognition.onnomatch = function (event) {
@@ -222,6 +140,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Pausar la animación del modelo 3D cuando el texto ha terminado de leerse
     avatar.removeAttribute('animation-mixer');
   });
+});
+
+
+ 
 
 const showAvatar = (onDone) => {
   const avatar = document.querySelector("#avatar");
@@ -257,11 +179,7 @@ AFRAME.registerComponent('mytarget', {
       // Realizar acciones necesarias después de que se haya cargado la escena, incluida la realidad aumentada
       showAvatar(() => {
         setTimeout(() => {
-          showPortfolio(() => {
-            setTimeout(() => {
-              showInfo();
-            }, 300);
-          });
+          
         }, 300);
       });
       // Por ejemplo, eliminar la dependencia de la imagen
