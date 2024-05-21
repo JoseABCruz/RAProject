@@ -15,7 +15,7 @@ La realidad aumentada permite complementar la experiencia del usuario a través 
 - Marcador de imagen (Octocad)
 - Dispositivo con camara
 # COMO UTILIZAR LA APLICACIÓN
-[https://drive.google.com/file/d/15QcskNeMnk_WN-0F3fzBN2AK9SVbH1k4/view?usp=drivesdk](Vídeo explicativo)
+[Vídeo explicativo](https://youtu.be/ZBG05m0Y4BM)
 
 # EQUIPO DE DESARROLLO :computer::boy:
 <table style="width: 100%; text-align: center;">
