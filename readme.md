@@ -35,10 +35,6 @@ La realidad aumentada permite complementar la experiencia del usuario a través 
     <td style="width: 33%;">Federico Victoriano sierra</td>
     <td style="width: 33%;">Tester</td>
   </tr>
-  <tr>
-    <td style="width: 33%;">Marcos Jonathan García Núñez</td>
-    <td style="width: 33%;">Diseñador</td>
-  </tr>
 </table>
 
 
