@@ -54,4 +54,4 @@ https://drive.google.com/file/d/15QcskNeMnk_WN-0F3fzBN2AK9SVbH1k4/view?usp=drive
 ## Estilo de letra utilizada (Bebas Neue)
 - https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap
 # LINK DE PROYECTO
-## https://gilded-melba-1184df.netlify.app/
+## https://brick-noiseless-month.glitch.me
